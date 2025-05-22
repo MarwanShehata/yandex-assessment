@@ -188,10 +188,12 @@ section {
   width: 100%;
   background: url(../img/hero-mobile.png);
   background-repeat: no-repeat;
-  background-size: 100% 812px;
   margin: 0 auto;
   padding-bottom: 32.9rem;
   max-height: 81.2rem;
+
+  background-size: cover;
+  background-position: bottom;
 }
 
 .title__first {
@@ -871,8 +873,9 @@ section {
   .hero {
     background-image: url(../img/hero-desk.png);
     background-size: cover;
-    background-position: center center;
-    padding-bottom: 12rem;
+
+    padding-bottom: 65rem;
+    background-position: bottom;
   }
 }
 
@@ -1414,3 +1417,88 @@ section {
     top: unset;
   }
 } */
+
+/*******HERO CHANGES********/
+/**TODO Our markup */
+/*    <section class="hero" itemscope="" itemtype="https://schema.org/Event">
+        <div class="container">
+          <article class="description">
+            <h1 class="title__first" itemprop="name">
+              <span class="title__first-block"> Превратите уездный город </span>
+              <span class="title__first-block"> в столицу </span>
+              <span class="title__first-block"> земного шара </span>
+            </h1>
+            <p class="description-text">
+              Оплатите взнос на телеграммы для организации Международного
+              васюкинского турнира по шахматам
+            </p>
+            <div class="btn-box">
+              <a href="#support-chess" class="btn btn__support btn__style-1">Поддержать шахматную мысль</a>
+              <a href="#tournament" class="btn btn__tournament btn__style-2">Подробнее о турнире</a>
+            </div>
+          </article>
+        </div>
+        <section class="marquee feed">
+          <ul class="marquee__text feed__content" animated="" paused="false">
+            <li>Дело помощи утопающим — дело рук самих утопающих!</li>
+            <li>ШАХМАТЫ ДВИГАЮТ ВПЕРЕД НЕ ТОЛЬКО КУЛЬТУРУ, НО И ЭКОНОМИКУ!</li>
+            <li>ЛЕД ТРОНУЛСЯ, ГОСПОДА ПРИСЯЖНЫЕ ЗАСЕДАТЕЛИ!</li>
+            <li>ПРИГЛАШАЕМ ВСЕХ НА МЕЖДУНАРОДНЫЙ ТУРНИР!</li>
+            <li>ВАСЮКИ — СТОЛИЦА ШАХМАТНОЙ МЫСЛИ!</li>
+            <li>ПОДДЕРЖИТЕ ШАХМАТНОЕ ДВИЖЕНИЕ!</li>
+            <li>УЧАСТВУЙТЕ В ЛЕКЦИЯХ И СЕАНСАХ ОДНОВРЕМЕННОЙ ИГРЫ!</li>
+            <li>ПРИЕЗЖАЙТЕ В ВАСЮКИ — ГОРОД БУДУЩЕГО!</li>
+            <li>ШАХМАТЫ — ПУТЬ К ПРОГРЕССУ!</li>
+            <li>ДОБРО ПОЖАЛОВАТЬ НА ТУРНИР!</li>
+            <li>Васюки ждут новых чемпионов!</li>
+            <li>Сделайте свой ход к успеху!</li>
+            <li>Вдохновляйтесь игрой великих мастеров!</li>
+            <li>Каждая партия — шаг к победе!</li>
+            <li>Шахматы объединяют поколения!</li>
+            <li>Васюкинский турнир — событие года!</li>
+            <li>Пусть победит сильнейший!</li>
+            <li>Шахматная мысль — гордость Васюков!</li>
+            <li>Вперёд к новым вершинам!</li>
+            <li>Васюки — город шахматных традиций!</li>
+          </ul>
+        </section>
+      </section> */
+
+/* Their markup */
+/*  <section class="header">
+      <div class="header__bg">
+        <div class="header__bg_ellipse"></div>
+        <div class="header__bg_chess-queen"></div>
+        <div class="header__bg_chess-king"></div>
+        <div class="header__bg_city"></div>
+        <div class="header__bg_chess-knight"></div>
+        <div class="header__bg_chess-pawn"></div>
+      </div>
+      <div class="fluid fluid_flex-column">
+        <div class="header__logo">
+          <div class="header__logo-icons">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="header__logo-text">КЛУБ<br>ЧЕТЫРЕХ КОНЕЙ</div>
+        </div>
+        <div class="header__content">
+          <h1 class="header__headline">В СТОЛИЦУ</h1>
+          <p class="header__action">
+            Оплатите взнос на телеграммы для организации Международного
+            васюкинского турнира по шахматам
+          </p>
+          <div class="header__buttons">
+            <a href="#content" aria-label="поддержать шахматную мысль" class="header__btn header__btn_fill">
+              <span>Поддержать</span>
+              <span>шахматную мысль</span>
+            </a>
+            <a href="#info" aria-label="подробнее о турнире" class="header__btn header__btn_unfill">
+              <span>Подробнее</span><span>о турнире</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section> */
