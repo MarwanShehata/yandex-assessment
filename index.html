@@ -20,7 +20,7 @@
       src="./assets/script/media.js"
       crossorigin="anonymous"
       defer
-      integrity="p/8kqvpa7GR2RbP4UqQZjoVdsYZRrmJIxvAjDvuT5r8Jy47e0xXa+TaG39jfIbCn"
+      integrity="0QATr1K8XkiWyf/MWVyiqAko0Ku1P0aTCdEKp0vBq0hgFEkmmbX/r0wiGSc93hKY"
     ></script>
     <script type="application/ld+json">
       {
@@ -447,9 +447,17 @@
               width="300"
               height="200"
             />
-            <div class="slider__container">
-              <article class="slider__item">
-                <ul class="timeline__list">
+            <div
+              class="slider__container"
+              style="
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+                transform: translateX(0px);
+              "
+            >
+              <!-- Item 1 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-1">
                   <li class="num">1</li>
                   <li
                     class="timeline__list-li timeline__list-text"
@@ -458,7 +466,11 @@
                     Строительство железнодорожной магистрали Москва-Васюки
                   </li>
                 </ul>
-                <ul class="timeline__list">
+              </article>
+
+              <!-- Item 2 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-2">
                   <li class="num">2</li>
                   <li class="timeline__list-li timeline__list-text">
                     Открытие фешенебельной гостиницы «Проходная пешка» и других
@@ -466,8 +478,10 @@
                   </li>
                 </ul>
               </article>
-              <article class="slider__item">
-                <ul class="timeline__list">
+
+              <!-- Item 3 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-3">
                   <li class="num">3</li>
                   <li class="timeline__list-li timeline__list-text">
                     Поднятие сельского хозяйства в радиусе на тысячу километров:
@@ -475,22 +489,30 @@
                   </li>
                 </ul>
               </article>
-              <article class="slider__item">
-                <ul class="timeline__list">
+
+              <!-- Item 4 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-4">
                   <li class="num">4</li>
                   <li class="timeline__list-li timeline__list-text">
                     Строительство дворца для турнира
                   </li>
                 </ul>
-                <ul class="timeline__list">
+              </article>
+
+              <!-- Item 5 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-5">
                   <li class="num">5</li>
                   <li class="timeline__list-li timeline__list-text">
                     Размещение гаражей для гостевого автотранспорта
                   </li>
                 </ul>
               </article>
-              <article class="slider__item">
-                <ul class="timeline__list">
+
+              <!-- Item 6 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-6">
                   <li class="num">6</li>
                   <li class="timeline__list-li timeline__list-text">
                     Постройка сверхмощной радиостанции для передачи всему миру
@@ -498,8 +520,10 @@
                   </li>
                 </ul>
               </article>
-              <article class="slider__item">
-                <ul class="timeline__list">
+
+              <!-- Item 7 -->
+              <article class="slider__item" style="min-width: 335px">
+                <ul class="timeline__list timeline__list-7">
                   <li class="num">7</li>
                   <li class="timeline__list-li timeline__list-text">
                     Создание аэропорта «Большие Васюки» с регулярным

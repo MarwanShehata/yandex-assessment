@@ -213,122 +213,152 @@ document.addEventListener('DOMContentLoaded', function () {
     )
     if (!sliderContainer) return
 
-    /** @type {Element[]} */
-    const sliderItems = safeQuerySelectorAll('.slider__item', sliderContainer)
+    /**
+     * @typedef {Object} SliderState
+     * @property {string|null} originalHTML - Memoized original HTML structure
+     * @property {boolean} transformed - Current transformation state
+     * @property {Element|null} sliderController - Reference to slider controller element
+     */
 
-    /** @type {string} - Original HTML structure of slider */
-    const originalSliderHTML = sliderItems
-      .map((item) => item.outerHTML)
-      .join('')
+    /** @type {SliderState} */
+    const state = {
+      originalHTML: null,
+      transformed: false,
+      sliderController: safeQuerySelector(
+        '.slider-controller',
+        timelineSection
+      ),
+    }
 
-    /** @type {boolean} - Flag to track if slider is in transformed state */
-    let transformed = false
+    // Initial capture of original structure
+    if (!state.originalHTML) {
+      /** @type {Element[]} */
+      const sliderItems = safeQuerySelectorAll('.slider__item', sliderContainer)
+      state.originalHTML = sliderItems.map((item) => item.outerHTML).join('')
+    }
 
     /**
-     * Transforms slider between desktop (combined) and mobile (separate) views
-     * - Desktop: Combines all timeline lists into one slider item
-     * - Mobile: Restores original structure with separate slider items
-     * TODO - NOT WORKING, I think the issue is because of there's layout thrashing and excessive recalculations during rapid viewport changes, I consider using memoization or requestAnimationFrame.
-     * @returns {void}
+     * Unified DOM update handler with requestAnimationFrame optimization
+     * @param {string} html - HTML content to inject into slider container
+     * @param {boolean} [showController=true] - Whether to show the slider controller
+     * @returns {Promise<void>} Promise that resolves when DOM update is complete
      */
-    function transformSlider() {
-      if (window.innerWidth >= 768 && !transformed) {
-        transformed = true
-
-        /** @type {Element[]} */
-        const allLists = safeQuerySelectorAll(
-          '.timeline__list',
-          sliderContainer
-        )
-
-        if (allLists.length === 0) return
-
-        /** @type {HTMLElement} */
-        const newSliderItem = document.createElement('article')
-        newSliderItem.classList.add('slider__item')
-
-        /** @type {HTMLDivElement} */
-        const wrapper = document.createElement('div')
-        wrapper.classList.add('combined-wrapper')
-
-        /** @type {number|null} - Timeout ID for resize debouncing */
-        let resizeTimeout = null
-        /** @type {boolean} - Track if currently in resize state */
-        let isResizing = false
-
-        /**
-         * Animate the grid that has instant-transform=true during resize
-         * and defaults back to false when resize stops
-         */
-        wrapper.setAttribute('instant-transform', 'false')
-
-        const handleResize = () => {
-          console.log(`resizing element ${wrapper.className}`)
-          if (!isResizing) {
-            isResizing = true
-            wrapper.setAttribute('instant-transform', 'true')
+    function updateDOM(html, showController = true) {
+      return new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          sliderContainer.innerHTML = html
+          if (state.sliderController) {
+            state.sliderController.style.display = showController ? '' : 'none'
           }
-
-          // Clear existing timeout to reset the timer
-          if (resizeTimeout) {
-            clearTimeout(resizeTimeout)
-          }
-
-          // Set new timeout to disable instant transforms after resize stops
-          resizeTimeout = setTimeout(() => {
-            isResizing = false
-            wrapper.setAttribute('instant-transform', 'false')
-          }, 200) // Reduced timeout for faster response
-        }
-
-        // Use the existing debounced resize handler instead of adding another listener
-        // This prevents multiple resize listeners from being attached
-        const debouncedHandleResize = debounce(handleResize, 16) // ~60fps
-        window.addEventListener('resize', debouncedHandleResize)
-        /** End of animate on resize */
-
-        /* Clone each list to avoid DOM manipulation issues
-     If you move the original elements, they disappear 
-     from their original places, which can break the layout
-     or make it hard to restore the original structure when switching back to mobile view. */
-        allLists.forEach((list, index) => {
-          const cloned = list.cloneNode(true)
-          cloned.classList.add(`timeline__list-${index + 1}`)
-          wrapper.appendChild(cloned)
+          resolve()
         })
+      })
+    }
 
-        newSliderItem.appendChild(wrapper)
+    /**
+     * Creates the desktop view by combining all timeline lists into one slider item
+     * @returns {Promise<void>} Promise that resolves when desktop view is created
+     */
+    async function createDesktopView() {
+      /** @type {Element[]} */
+      const allLists = safeQuerySelectorAll('.timeline__list', sliderContainer)
+      if (allLists.length === 0) return
 
-        sliderContainer.innerHTML = ''
-        sliderContainer.appendChild(newSliderItem)
+      /** @type {HTMLElement} */
+      const newSliderItem = document.createElement('article')
+      newSliderItem.classList.add('slider__item')
 
-        /** @type {Element|null} */
-        const sliderController = safeQuerySelector(
-          '.slider-controller',
-          timelineSection
-        )
-        if (sliderController) {
-          sliderController.style.display = 'none'
-        }
-      } else if (window.innerWidth < 768 && transformed) {
-        transformed = false
+      /** @type {HTMLDivElement} */
+      const wrapper = document.createElement('div')
+      wrapper.classList.add('combined-wrapper')
 
-        sliderContainer.innerHTML = originalSliderHTML
+      // Clone nodes with optimized batch operation using DocumentFragment
+      /** @type {DocumentFragment} */
+      const fragment = document.createDocumentFragment()
 
-        /** @type {Element|null} */
-        const sliderController = safeQuerySelector(
-          '.slider-controller',
-          timelineSection
-        )
-        if (sliderController) {
-          sliderController.style.display = ''
-        }
+      allLists.forEach((list, index) => {
+        /** @type {Element} */
+        const cloned = list.cloneNode(true)
+        cloned.classList.add(`timeline__list-${index + 1}`)
+        fragment.appendChild(cloned)
+      })
+
+      wrapper.appendChild(fragment)
+      newSliderItem.appendChild(wrapper)
+
+      await updateDOM(newSliderItem.outerHTML, false)
+      state.transformed = true
+    }
+
+    /**
+     * Restores the mobile view by reverting to original HTML structure
+     * @returns {Promise<void>} Promise that resolves when mobile view is restored
+     */
+    async function restoreMobileView() {
+      if (!state.originalHTML) {
+        console.warn('Original HTML not available for mobile restoration')
+        return
+      }
+
+      await updateDOM(state.originalHTML, true)
+      state.transformed = false
+    }
+
+    /**
+     * Main transformation handler that switches between desktop and mobile views
+     * based on viewport width (768px breakpoint)
+     * @returns {Promise<void>} Promise that resolves when transformation is complete
+     */
+    async function transformSlider() {
+      /** @type {boolean} */
+      const isDesktop = window.innerWidth >= 768
+
+      if (isDesktop && !state.transformed) {
+        await createDesktopView()
+      } else if (!isDesktop && state.transformed) {
+        await restoreMobileView()
       }
     }
 
+    // Initial setup
     transformSlider()
 
-    window.addEventListener('resize', debounce(transformSlider, 150))
+    /**
+     * Optimized resize handler with debouncing and requestAnimationFrame
+     * @type {number|undefined} - Timeout ID for resize debouncing
+     */
+    let resizeTimeout
+
+    /**
+     * Resize event handler that debounces resize events and uses requestAnimationFrame
+     * for smooth performance during viewport changes
+     */
+    const handleResize = () => {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        requestAnimationFrame(() => {
+          transformSlider().catch((error) => {
+            console.error('Error during slider transformation:', error)
+          })
+        })
+      }, 100)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    /**
+     * Cleanup function for memory management (optional but recommended)
+     * Removes event listeners and clears timeouts on page unload
+     */
+    const cleanup = () => {
+      window.removeEventListener('resize', handleResize)
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout)
+      }
+    }
+
+    // Optional: Add cleanup on page unload
+    window.addEventListener('beforeunload', cleanup)
   })()
 
   // 4. Carousel controller rearrangement
