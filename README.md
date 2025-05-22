@@ -1,3 +1,5 @@
+[Deployed on Vercel: Международный васюкинский турнир](https://yandex-assessment.vercel.app/)
+
 ## HTML Structure & Semantics
 
 1. I changed the root `html` tag to specify Russian content: `<html lang="ru">`
