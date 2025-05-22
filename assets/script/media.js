@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
      * Transforms slider between desktop (combined) and mobile (separate) views
      * - Desktop: Combines all timeline lists into one slider item
      * - Mobile: Restores original structure with separate slider items
+     * TODO - NOT WORKING
      * @returns {void}
      */
     function transformSlider() {
@@ -250,23 +251,46 @@ document.addEventListener('DOMContentLoaded', function () {
         const wrapper = document.createElement('div')
         wrapper.classList.add('combined-wrapper')
 
-        /** tansform on resize */
+        /** @type {number|null} - Timeout ID for resize debouncing */
+        let resizeTimeout = null
+        /** @type {boolean} - Track if currently in resize state */
+        let isResizing = false
+
+        /**
+         * Animate the grid that has instant-transform=true during resize
+         * and defaults back to false when resize stops
+         */
         wrapper.setAttribute('instant-transform', 'false')
-        document.addEventListener('resize', function () {
+
+        const handleResize = () => {
           console.log(`resizing element ${wrapper.className}`)
-          wrapper.setAttribute('instant-transform', 'false')
-          clearTimeout(resizeTimeout)
-          resizeTimeout = setTimeout(() => {
+          if (!isResizing) {
+            isResizing = true
             wrapper.setAttribute('instant-transform', 'true')
-          }, 500)
-        })
-        //TODO DOESNT work
-        /** End of transform on resize */
+          }
+
+          // Clear existing timeout to reset the timer
+          if (resizeTimeout) {
+            clearTimeout(resizeTimeout)
+          }
+
+          // Set new timeout to disable instant transforms after resize stops
+          resizeTimeout = setTimeout(() => {
+            isResizing = false
+            wrapper.setAttribute('instant-transform', 'false')
+          }, 200) // Reduced timeout for faster response
+        }
+
+        // Use the existing debounced resize handler instead of adding another listener
+        // This prevents multiple resize listeners from being attached
+        const debouncedHandleResize = debounce(handleResize, 16) // ~60fps
+        window.addEventListener('resize', debouncedHandleResize)
+        /** End of animate on resize */
 
         /* Clone each list to avoid DOM manipulation issues
-         If you move the original elements, they disappear 
-         from their original places, which can break the layout
-         or make it hard to restore the original structure when switching back to mobile view. */
+     If you move the original elements, they disappear 
+     from their original places, which can break the layout
+     or make it hard to restore the original structure when switching back to mobile view. */
         allLists.forEach((list, index) => {
           const cloned = list.cloneNode(true)
           cloned.classList.add(`timeline__list-${index + 1}`)
@@ -303,6 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     transformSlider()
+
     window.addEventListener('resize', debounce(transformSlider, 150))
   })()
 

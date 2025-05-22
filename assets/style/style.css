@@ -1297,10 +1297,37 @@ section {
     max-width: 100%;
   }
 }
-.combined-wrapper[instant-transform='false'] {
-  /**TODO */
-  transition: transform 0.3s;
+
+/* FIXME smooth transition on resize with the transformSlider function in media.js */
+:root {
+  --translate-x: 0px;
 }
+.combined-wrapper[instant-transform='true'] {
+  /**TODO */
+  transition: transform 0.3s ease-in-out; /* Animate during resize */
+}
+.combined-wrapper[instant-transform='true'] .timeline__list {
+  transition: all 0.3s ease-in-out; /* Smooth transitions during resize */
+}
+.combined-wrapper[instant-transform='false'] {
+  transition: none; /* No animation when not resizing */
+}
+.combined-wrapper[instant-transform='false'] .timeline__list {
+  transition: none; /* No transitions when not resizing */
+}
+.combined-wrapper .timeline__list > * {
+  transition: all 0.3s ease-in-out;
+}
+
+.combined-wrapper[instant-transform='true'] .timeline__list > * {
+  transition: all 0.3s ease-in-out; /* Smooth transitions during resize */
+}
+
+.combined-wrapper[instant-transform='false'] .timeline__list > * {
+  transition: none; /* No transitions when not resizing */
+}
+/** END FIXME */
+
 /** PARENT .combined-wrapper 👆**/
 /** children .timeline__list .timeline__list-1...7 **/
 .timeline__list {
@@ -1313,6 +1340,7 @@ section {
   counter-increment: stages-item;
   padding: 62px 20px 20px;
   min-height: 150px;
+  transition: all 0.3s ease-in-out;
 }
 .timeline__list-1 {
   grid-area: item-1;
