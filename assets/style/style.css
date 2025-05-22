@@ -210,7 +210,7 @@ section {
   box-sizing: border-box;
 }
 
-.title__first_block:nth-child(2n) {
+.title__first-block:nth-child(2n) {
   text-align: center;
   display: block;
   -webkit-box-sizing: border-box;
@@ -218,7 +218,7 @@ section {
   margin-left: 0.8rem;
 }
 
-.title__first_block:nth-child(3n) {
+.title__first-block:nth-child(3n) {
   text-align: right;
   display: block;
   -webkit-box-sizing: border-box;
@@ -415,7 +415,7 @@ section {
   margin-top: 2.7rem;
 }
 
-.tournament-section__item_img {
+.tournament-section__item-img {
   max-width: 33.5rem;
   width: 100%;
   display: block;
@@ -428,7 +428,7 @@ section {
   font-weight: 700;
 }
 
-.tournament-section__item_img-2 {
+.tournament-section__item-img-2 {
   max-width: 33.5rem;
   margin-bottom: 5.4rem;
   max-height: 40.2rem;
@@ -438,7 +438,7 @@ section {
   margin-top: 3.4rem;
 }
 
-.tournament-section__item_description {
+.tournament-section__item-description {
   margin-top: 0.5rem;
 }
 .tournament-section__item-description-card {
@@ -446,7 +446,7 @@ section {
   border-bottom: 2px solid #d0d0d0;
 }
 
-.tournament-section__item_description-text {
+.tournament-section__item-description-text {
   font-family: var(--sub-font);
   font-size: 2rem;
   line-height: 24px;
@@ -460,23 +460,23 @@ section {
   gap: 1.2rem;
 }
 
-.tournament-section__item_description-pay {
+.tournament-section__item-description-pay {
   -webkit-box-orient: horizontal !important;
   -webkit-box-direction: normal !important;
   -ms-flex-direction: row !important;
   flex-direction: row !important;
 }
 
-.tournament-section__item_description-text span {
+.tournament-section__item-description-text span {
   display: block;
 }
 
-.tournament-section__item_description-name {
+.tournament-section__item-description-name {
   font-weight: 400;
   opacity: 0.7;
 }
 
-.tournament-section__item_description-info {
+.tournament-section__item-description-info {
   font-weight: 600;
 }
 
@@ -484,7 +484,7 @@ section {
   border-bottom: none;
 }
 
-.tournament-section__item_description-price {
+.tournament-section__item-description-price {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
@@ -589,7 +589,7 @@ section {
   display: flex;
   gap: 1.6rem;
 }
-.timeline__list_li {
+.timeline__list-li {
   font-variant-numeric: lining-nums proportional-nums;
   position: relative;
   font-family: var(--sub-font);
@@ -916,7 +916,7 @@ section {
     max-width: 54.2rem;
   }
 
-  .title__first_block:nth-child(2n) {
+  .title__first-block:nth-child(2n) {
     margin-left: 0.3rem;
   }
 
@@ -999,7 +999,7 @@ section {
     gap: 6rem;
   }
 
-  .tournament-section__item_img {
+  .tournament-section__item-img {
     max-width: 39.4rem;
     max-height: 25rem;
     height: auto;
@@ -1016,7 +1016,7 @@ section {
     margin-top: 6.4rem !important;
   }
 
-  .tournament-section__item_fxdc {
+  .tournament-section__item-fxdc {
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
     -ms-flex-direction: column !important;
@@ -1030,7 +1030,7 @@ section {
     align-items: flex-start !important;
   }
 
-  .tournament-section__item_img-2 {
+  .tournament-section__item-img-2 {
     max-width: 47.4rem;
     max-height: 52.7rem;
     margin-top: 0;
@@ -1042,7 +1042,7 @@ section {
     -ms-flex-align: start;
     align-items: flex-start;
   }
-  .tournament-section__item_description-text {
+  .tournament-section__item-description-text {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -1052,7 +1052,7 @@ section {
     align-items: center;
   }
 
-  .tournament-section__item_description {
+  .tournament-section__item-description {
     margin-top: 4.6rem;
   }
 
@@ -1066,7 +1066,7 @@ section {
     -ms-flex-align: center;
     align-items: center;
   }
-  .tournament-section__item_description-name {
+  .tournament-section__item-description-name {
     max-width: 31rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -1145,7 +1145,7 @@ section {
     width: 100%;
   }
 
-  .timeline__list_li {
+  .timeline__list-li {
     font-size: 2rem;
     line-height: 24px;
     max-width: 80ch;

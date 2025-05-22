@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const supportText = safeQuerySelector('.support-text')
     /** @type {Element|null} */
     const descriptionBlock = safeQuerySelector(
-      '.tournament-section__item_description'
+      '.tournament-section__item-description'
     )
 
     // Move support text to description block if elements exist and move hasn't been done
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
      * Transforms slider between desktop (combined) and mobile (separate) views
      * - Desktop: Combines all timeline lists into one slider item
      * - Mobile: Restores original structure with separate slider items
-     * TODO - NOT WORKING
+     * TODO - NOT WORKING, I think the issue is because of there's layout thrashing and excessive recalculations during rapid viewport changes, I consider using memoization or requestAnimationFrame.
      * @returns {void}
      */
     function transformSlider() {

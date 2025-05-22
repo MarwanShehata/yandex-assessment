@@ -1,72 +1,132 @@
-[Yandex Submit Form](https://forms.yandex.ru/surveys/13748468.2e05b5c8642385afdefc5e0f31adfe5b59380366/?utm_source=hh&utm_medium=on_site_message&utm_content=4496225795)
+## HTML Structure & Semantics
 
-### **1. Bug and Error Analysis on a Web Page (Case Assignment)**
-
-You are given a website that needs to be tested, provided as a link to an archive with the source files.
-To access it, download the archive, unzip it, and open the `index.html` file in your browser.
-🔗 [https://disk.yandex.ru/d/ttGuG3YzEZP7jg](https://disk.yandex.ru/d/ttGuG3YzEZP7jg)
-The design mockup is in Figma:
-🔗 [https://www.figma.com/design/0xXfupPNU3aZxPqFbmhCKb/Дизайн-для-верстки-|-Тестовый-лендинг?node-id=0-1\&p=f\&t=uWcJf1JK8UQfcDRr-0](https://www.figma.com/design/0xXfupPNU3aZxPqFbmhCKb/Дизайн-для-верстки-|-Тестовый-лендинг?node-id=0-1&p=f&t=uWcJf1JK8UQfcDRr-0)
-
-Check the site for the following issues:
-
-* **Cross-browser compatibility** (test in different browsers: Chrome, Firefox, Safari, Edge).
-* **Responsiveness** (check how the page looks on different devices and screen sizes: mobile, tablet, desktop).
-* **Performance** (measure how long the page takes to load using tools like Google Lighthouse or others).
-* **Layout issues** (e.g., incorrect spacing, mismatch with the design).
-* **Technical errors** (e.g., non-working forms, buttons, or dynamic elements).
-
-**Instructions:**
-
-* For each point, list the errors or areas of improvement you found.
-* Describe how each issue can be fixed (if it’s possible from your side).
-* Attach screenshots or links to performance and responsiveness test results (e.g., from Google Lighthouse, BrowserStack).
-
----
-
-### **2. Code Quality Check (Case Assignment)**
-
-You are given a code snippet. Your task is:
-
-* Evaluate whether the code follows best practices.
-* Identify any mistakes or code quality issues (e.g., non-compliance with standards, optimization problems).
-* Suggest improvements or fixes.
-
-**Code snippet (example):**
+1. I changed the root `html` tag to specify Russian content: `<html lang="ru">`
+2. Only **one `<h1>`** per page... then I used proper heading hierarchy (`<h2>`, `<h3>`, etc.) thereafter.
+3. Used Semantic HTML tags and ARIA attributes as much as possible, (e.g., `aria-label="Предыдущий слайд"`) and `aria-live="polite"` to dynamic content for screen reader updates:
 
 ```html
-<div class="header">
-  <h1>Добро пожаловать на наш сайт</h1>
-  <p>Мы рады вас видеть!</p>
-  <a href="/about-us">О нас</a>
-</div>
+<div
+  class="count-indicator"
+  aria-label="Индикатор участников"
+  aria-live="polite"
+></div>
 ```
 
 ---
 
-### **3. Analysis and Feedback**
+## Accessibility (a11y)
 
-Imagine you received a layout for review from a developer.
-The developer submitted a page with a data input form. However:
+10. for screen reader users, SEO, and voice recognition software users... we should add descriptive text to buttons: aka add a `title` attribute `<button class="btn__prev" title="Предыдущий слайд">` or we could use `aria-label` (e.g.:- `aria-label="Предыдущий слайд"`).
+11. add `aria-hidden="true"` on SVGs to prevent screen readers from trying to announce the SVG content.
+12. Contrast issues got captured with Lighthouse: Low-contrast text is difficult or impossible for many users to read. On the following:
 
-* The form does not function correctly (data is not being submitted),
-* The form is not responsive,
-* The styles violate the brand’s design guidelines,
-* You only have access to the frontend (no server-side access),
-* The layout doesn’t fully match the requirements of the technical specification.
-
-**Your tasks:**
-
-* How would you describe the detected issues in the form of **constructive feedback**?
-* How would you suggest improving the design or code to meet the requirements?
-* Describe how you would **explain to the developer** the importance of following the technical specifications and standards.
+| Selector              | Issue        |
+| --------------------- | ------------ |
+| `span.total-count`    | Low contrast |
+| `span.person__status` | Low contrast |
+| `p.footer__text`      | Low contrast |
+| `footer.footer`       | Low contrast |
 
 ---
 
-### **4. Open Questions**
+## Meta Tags & SEO
 
-* What do you value more when reviewing code: **readability** or **performance**? Why?
-* How do you test a website’s **cross-browser compatibility**? What tools do you use for this?
-* What are the **core principles** of responsive testing? What special considerations do you keep in mind for mobile versions?
-* What approaches do you use to analyze and improve **website performance**?
-* How would you organize the **web application testing process** in your team?
+3. I replaced the generic title with a descriptive, keyword-rich one: `<title>Международный Васюкинский Турнир по Шахматам | 22 июня 1927</title>`
+4. meta tags and social media sharing:
+
+   - missing meta description tags,
+   - Missing Open Graph and Twitter Card meta tags for social sharing,
+   - No robots or viewport meta tags. Add these inside the `<head>` element
+
+5. No schema.org markup for the event information, so adding structured data would help search engines understand the content better
+
+```html
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": "Международный васюкинский турнир по шахматам",
+    "startDate": "1927-06-22T18:00",
+    "endDate": "1927-06-30",
+    "location": {
+      "@type": "Place",
+      "name": "Клуб «Картонажник»",
+      "address": "г. Васюки"
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Администрация турнира",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "name": "К. Михельсон"
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0.20",
+      "priceCurrency": "RUB",
+      "availability": "InStock"
+    }
+  }
+</script>
+```
+
+---
+
+## Images
+
+7. No `width` and `height` attributes on images (helps with layout stability).
+8. Consider adding lazy loading for images below the fold: `loading="lazy"`
+9. Also from Lighthouse: Image display dimensions should match natural aspect ratio on some images, So you should explicitly set correct width and height, or Or set `aspect-ratio` in the CSS rules.
+10. TODO: \[ ] Hero background: Optimize as a **sprite** instead of a 1.6MB PNG
+
+---
+
+## CSS & Layout
+
+2. Ensure all class names follow the **_BEM_** convention **and** are in **kebab-case**
+3. changed the slider `marquee` animation to be from **RTL → LTR**, for readability
+4. The tournment's logo was simple so I made it with **pure CSS** to reduce the network requests.
+5. Fixed alot the CSS layout issues.
+
+---
+
+## Fonts & Performance
+
+12. One more thing, from the CSS file I saw that we only used weights 400,500,600, and 700 and we never used any other configuration of the fonts like Italic for example, and we are importing the whole fonts, why? it seems unnecessary
+    Also, So I replaced Google fonts with @font-face as local files for better privacy & performance
+
+13. from Chrome DevTools Performance audit shows that multiple fonts were late-loading, and at 539.29ms, a "cluster" of layout shifts happened.![@539.29ms layout shifts](image.png), so Use `<link rel="preload">` in HTML and removing the fonts fetching from CSS
+
+14. ![delaying LCP=Largest Contentful Paint](image-1.png) because google fonts block rendering until they're downloaded and parsed, and they're in the critical rendering path, delaying LCP.
+
+15. One more thing, from the CSS file I saw that we only used weights 400,500,600, and 700 and we never used any other configuration of the fonts like Italic for example, and we are importing the whole fonts, why? it seems unnecessary
+
+16. Layout shifts before solving the `LCP` and `CLS` issues:
+    ![animation of the layout shifts in the previous points](layout-shifts.gif)
+
+---
+
+## Security
+
+19. The `integrity` attribute in script and link tags is a security feature that ensures the files your web page loads haven't been tampered with, so I addded `integrity="HASH"` and `crossorigin="anonymous"` attributes to the scripts. So I added SRI hashes for script security.
+
+---
+
+## JavaScript Quality & Structure
+
+26. Proper **JSDoc** documentation for functions and variables
+27. **Cached DOM elements** to avoid repeated queries
+28. Added **guard clauses** for `null` checks
+29. **_IIFE Wrapping_**: I encapsulated each script (`carousel.js`, `slider.js`, `media.js`) in IIFEs (Immediately Invoked Function Expressions) to prevent global scope pollution. This is excellent for isolating functionality.
+30. Functional Decomposition:
+
+- In `carousel.js`, I split logic into pure functions (`getItemsPerSlide`, `getGapSize`, `calculateCarouselMetrics`).
+- In `slider.js`, I used state management (state object) to track slider initialization and index.
+- In `media.js`, I grouped related DOM manipulations (e.g., `setupHeadingCombination`, `setupTournamentSection...`)
+
+---
+
+## TODOs & Bugs
+
+24. TODO: Slider buttons don’t work reliably on desktop - investigate: the slider's next & prev buttons don't work on desktop environments although the cards are automatically moved, or sometimes it does that, not consistently.

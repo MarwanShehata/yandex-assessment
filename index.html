@@ -1,13 +1,55 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" itemscope itemtype="https://schema.org/WebPage">
   <head>
     <link rel="stylesheet" href="./assets/style/style.css" />
-    <!-- crossorigin="anonymous" -->
-    <!-- integrity="DmBD6B7CjzSKjjEDK5ZBYJcp3Ik90xUw/tzcsEdnjYOnP8ZqjpMUc5rVnXls83M5" -->
     <script src="./assets/script/index.js" defer></script>
-    <script src="./assets/script/carousel.js" defer></script>
-    <script src="./assets/script/slider.js" defer></script>
-    <script src="./assets/script/media.js" defer></script>
+    <!-- $ cat ./assets/script/carousel.js | openssl dgst -sha384 -binary | openssl base64 -A -->
+    <script
+      src="./assets/script/carousel.js"
+      defer
+      crossorigin="anonymous"
+      integrity="fkX4vZ22eDjACR7/BSAmCIgUeA3XtQTQSOfeq33QBUDVO5ZRZjq5CLNuaRUqWPVc"
+    ></script>
+    <script
+      src="./assets/script/slider.js"
+      crossorigin="anonymous"
+      defer
+      integrity="xp8lBu1IuE4PQQ56n4dxTXnZPRPGblap2kZCmbfATymlK+KodoRx8fsO8EA5zVly"
+    ></script>
+    <script
+      src="./assets/script/media.js"
+      crossorigin="anonymous"
+      defer
+      integrity="p/8kqvpa7GR2RbP4UqQZjoVdsYZRrmJIxvAjDvuT5r8Jy47e0xXa+TaG39jfIbCn"
+    ></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Международный васюкинский турнир по шахматам",
+        "startDate": "1927-06-22T18:00",
+        "endDate": "1927-06-30",
+        "location": {
+          "@type": "Place",
+          "name": "Клуб «Картонажник»",
+          "address": "г. Васюки"
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Администрация турнира",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "name": "К. Михельсон"
+          }
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0.20",
+          "priceCurrency": "RUB",
+          "availability": "InStock"
+        }
+      }
+    </script>
     <title>Международный васюкинский турнир</title>
 
     <meta charset="utf-8" />
@@ -54,7 +96,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Международный васюкинский турнир по шахматам"
+      content="Официальный сайт Международного васюкинского турнира по шахматам"
     />
     <meta
       name="keywords"
@@ -190,21 +232,25 @@
           <a href="#" class="" aria-label="Главная страница">
             <div class="logo__link">
               <img
+                itemprop="image"
                 src="./assets/images/public/masked-icon-svg.svg"
                 class="logo__img"
                 alt="Логотип Международного васюкинского турнира"
               />
               <img
+                itemprop="image"
                 src="./assets/images/public/masked-icon-svg.svg"
                 class="logo__img"
                 alt="Логотип Международного васюкинского турнира"
               />
               <img
+                itemprop="image"
                 src="./assets/images/public/masked-icon-svg.svg"
                 class="logo__img"
                 alt="Логотип Международного васюкинского турнира"
               />
               <img
+                itemprop="image"
                 src="./assets/images/public/masked-icon-svg.svg"
                 class="logo__img"
                 alt="Логотип Международного васюкинского турнира"
@@ -218,14 +264,14 @@
         </nav>
       </div>
     </header>
-    <main>
-      <section class="hero">
+    <main itemprop="mainContentOfPage">
+      <section class="hero" itemscope itemtype="https://schema.org/Event">
         <div class="container">
           <article class="description">
-            <h1 class="title__first">
-              <span class="title__first_block"> Превратите уездный город </span>
-              <span class="title__first_block"> в столицу </span>
-              <span class="title__first_block"> земного шара </span>
+            <h1 class="title__first" itemprop="name">
+              <span class="title__first-block"> Превратите уездный город </span>
+              <span class="title__first-block"> в столицу </span>
+              <span class="title__first-block"> земного шара </span>
             </h1>
             <p class="description-text">
               Оплатите взнос на телеграммы для организации Международного
@@ -274,9 +320,10 @@
               Чтобы поддержать Международный васюкинский турнир
             </h2>
             <img
+              itemprop="image"
               src="./assets/img/tournament-section__item-img1.png"
               alt="Шахматисты"
-              class="tournament-section__item_img"
+              class="tournament-section__item-img"
               width="400"
               height="300"
             />
@@ -289,73 +336,86 @@
               </span>
             </h2>
             <img
+              itemprop="image"
               src="./assets/img/tournament-mob-2.png"
               alt="Шахматисты"
-              class="tournament-section__item_img-2"
+              class="tournament-section__item-img-2"
               width="400"
               height="300"
             />
           </article>
           <article
-            class="tournament-section__item tournament-section__item_fxdc"
+            class="tournament-section__item tournament-section__item-fxdc"
           >
-            <h2 class="title__second">
+            <h2 class="title__second" itemprop="description">
               и Сеанс
               <span class="title__second-style">
                 одновременной игры в шахматы на 160 досках
               </span>
               гроссмейстера О. Бендера
             </h2>
-            <div class="tournament-section__item_description">
+            <div class="tournament-section__item-description">
               <article class="tournament-section__item-description-card">
-                <p class="tournament-section__item_description-text">
-                  <span class="tournament-section__item_description-name">
+                <p
+                  class="tournament-section__item-description-text"
+                  itemprop="location"
+                  itemscope
+                  itemtype="https://schema.org/Place"
+                >
+                  <span class="tournament-section__item-description-name">
                     Место проведения:
                   </span>
-                  <span class="tournament-section__item_description-info">
+                  <span
+                    class="tournament-section__item-description-info"
+                    itemprop="name"
+                  >
                     Клуб «Картонажник»
                   </span>
                 </p>
               </article>
               <article class="tournament-section__item-description-card">
-                <p class="tournament-section__item_description-text">
-                  <span class="tournament-section__item_description-name">
+                <p class="tournament-section__item-description-text">
+                  <span class="tournament-section__item-description-name">
                     Дата и время мероприятия:
                   </span>
-                  <span class="tournament-section__item_description-info">
+                  <time
+                    class="tournament-section__item-description-info"
+                    itemprop="startDate"
+                    datetime="1927-06-22T18:00"
+                  >
                     22 июня 1927 г. в 18:00
-                  </span>
+                  </time>
                 </p>
               </article>
               <article class="tournament-section__item-description-card">
-                <p class="tournament-section__item_description-text">
-                  <span class="tournament-section__item_description-name">
+                <p class="tournament-section__item-description-text">
+                  <span class="tournament-section__item-description-name">
                     Стоимость входных билетов:
                   </span>
-                  <span class="tournament-section__item_description-info">
+                  <span class="tournament-section__item-description-info">
                     20 коп.
                   </span>
                 </p>
               </article>
               <article class="tournament-section__item-description-card">
                 <p
-                  class="tournament-section__item_description-text tournament-section__item_description-pay"
+                  class="tournament-section__item-description-text tournament-section__item-description-pay"
                 >
-                  <span class="tournament-section__item_description-name">
+                  <span class="tournament-section__item-description-name">
                     Плата за игру:
                   </span>
-                  <span class="tournament-section__item_description-info">
+                  <span class="tournament-section__item-description-info">
                     50 коп.
                   </span>
                 </p>
               </article>
               <article class="tournament-section__item-description-card">
-                <p class="tournament-section__item_description-text">
-                  <span class="tournament-section__item_description-name">
+                <p class="tournament-section__item-description-text">
+                  <span class="tournament-section__item-description-name">
                     Взнос на телеграммы:
                   </span>
                   <span
-                    class="tournament-section__item_description-info tournament-section__item_description-price"
+                    class="tournament-section__item-description-info tournament-section__item-description-price"
                   >
                     <s class="old-price"> 100 руб. </s>
                     21 руб. 16 коп.
@@ -380,6 +440,7 @@
           </p>
           <div class="slider">
             <img
+              itemprop="image"
               src="./assets/img/timeline-card__img-mob.png"
               alt="Карта развития Васюков"
               class="slider__card_img"
@@ -390,13 +451,16 @@
               <article class="slider__item">
                 <ul class="timeline__list">
                   <li class="num">1</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li
+                    class="timeline__list-li timeline__list-text"
+                    itemprop="address"
+                  >
                     Строительство железнодорожной магистрали Москва-Васюки
                   </li>
                 </ul>
                 <ul class="timeline__list">
                   <li class="num">2</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li class="timeline__list-li timeline__list-text">
                     Открытие фешенебельной гостиницы «Проходная пешка» и других
                     небоскрёбов
                   </li>
@@ -405,7 +469,7 @@
               <article class="slider__item">
                 <ul class="timeline__list">
                   <li class="num">3</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li class="timeline__list-li timeline__list-text">
                     Поднятие сельского хозяйства в радиусе на тысячу километров:
                     производство овощей, фруктов, икры, шоколадных конфет
                   </li>
@@ -414,13 +478,13 @@
               <article class="slider__item">
                 <ul class="timeline__list">
                   <li class="num">4</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li class="timeline__list-li timeline__list-text">
                     Строительство дворца для турнира
                   </li>
                 </ul>
                 <ul class="timeline__list">
                   <li class="num">5</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li class="timeline__list-li timeline__list-text">
                     Размещение гаражей для гостевого автотранспорта
                   </li>
                 </ul>
@@ -428,7 +492,7 @@
               <article class="slider__item">
                 <ul class="timeline__list">
                   <li class="num">6</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li class="timeline__list-li timeline__list-text">
                     Постройка сверхмощной радиостанции для передачи всему миру
                     сенсационных результатов
                   </li>
@@ -437,7 +501,7 @@
               <article class="slider__item">
                 <ul class="timeline__list">
                   <li class="num">7</li>
-                  <li class="timeline__list_li timeline__list_text">
+                  <li class="timeline__list-li timeline__list-text">
                     Создание аэропорта «Большие Васюки» с регулярным
                     отправлением почтовых самолётов и дирижаблей во все концы
                     света, включая Лос-Анжелос и Мельбурн
@@ -499,21 +563,32 @@
           <h2 class="title__first">Участники турнира</h2>
           <div class="carousel">
             <div class="carousel__container">
-              <article class="carousel__item">
+              <article
+                class="carousel__item"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <img
+                  itemprop="image"
                   src="./assets/img/person__avatar.png"
                   alt="Фото Хозе-Рауль Капабланка"
                   class="person__avatar"
                   width="150"
                   height="150"
                   loading="lazy"
+                  itemprop="image"
                 />
                 <span class="person__name">Хозе-Рауль Капабланка</span>
                 <span class="person__status">Чемпион мира по шахматам</span>
                 <a href="#" class="btn__learn-more"> Подробнее </a>
               </article>
-              <article class="carousel__item">
+              <article
+                class="carousel__item"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <img
+                  itemprop="image"
                   src="./assets/img/person__avatar.png"
                   alt="Фото Эммануил Ласкер"
                   class="person__avatar"
@@ -525,8 +600,13 @@
                 <span class="person__status">Чемпион мира по шахматам</span>
                 <a href="#" class="btn__learn-more"> Подробнее </a>
               </article>
-              <article class="carousel__item">
+              <article
+                class="carousel__item"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <img
+                  itemprop="image"
                   src="./assets/img/person__avatar.png"
                   alt="Фото Александр Алехин"
                   class="person__avatar"
@@ -538,8 +618,13 @@
                 <span class="person__status">Чемпион мира по шахматам</span>
                 <a href="#" class="btn__learn-more"> Подробнее </a>
               </article>
-              <article class="carousel__item">
+              <article
+                class="carousel__item"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <img
+                  itemprop="image"
                   src="./assets/img/person__avatar.png"
                   alt="Фото Арон Нимцович"
                   class="person__avatar"
@@ -551,8 +636,13 @@
                 <span class="person__status">Чемпион мира по шахматам</span>
                 <a href="#" class="btn__learn-more"> Подробнее </a>
               </article>
-              <article class="carousel__item">
+              <article
+                class="carousel__item"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <img
+                  itemprop="image"
                   src="./assets/img/person__avatar.png"
                   alt="Фото Рихард Рети"
                   class="person__avatar"
@@ -564,8 +654,13 @@
                 <span class="person__status">Чемпион мира по шахматам</span>
                 <a href="#" class="btn__learn-more"> Подробнее </a>
               </article>
-              <article class="carousel__item">
+              <article
+                class="carousel__item"
+                itemscope
+                itemtype="https://schema.org/Person"
+              >
                 <img
+                  itemprop="image"
                   src="./assets/img/person__avatar.png"
                   alt="Фото Остап Бендер"
                   class="person__avatar"
@@ -604,6 +699,7 @@
             <div
               class="count-indicator"
               aria-label="Индикатор участников"
+              aria-live="polite"
             ></div>
             <button
               title="Следующий"
